@@ -1,18 +1,24 @@
 # Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
-# player movment code from https://youtu.be/hsJ7K301mEU
+# player movment code from https://www.youtube.com/@MaxTeachesTech
+# backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
 import pygame
 
 pygame.init()
 win = pygame.display.set_mode((500, 500))
+bg_img = pygame.image.load('gras_BG.png')
+bg = pygame.transform.scale(bg_img, (500,450))
 
 black = (0, 0, 0)
 wite = (255, 255, 255)
+red = (255, 0, 0)
 size = [500, 450]
 x = 20
 y = 380
 radius = 15
 vel_x = 10
 vel_y = 10
+i = 0
+width = 500
 jump = False
 
 screen = pygame.display.set_mode(size)
@@ -26,18 +32,26 @@ while not done:
     clock.tick(10)
 
     # Player
-    pygame.draw.circle(win, (black), (int(x), int(y)), radius)
+    player = pygame.draw.circle(win, (black), (int(x), int(y)), radius)
     # graund     
     pygame.draw.rect(screen, black, [0, 400, 500, 400])
-    # opstakel     
-    pygame.draw.rect(screen, black, [200, 349, 50, 50])
+    # opstakel
+    opstakel = pygame.draw.rect(screen, red, [200, 349, 50, 50])
 
 
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
             run = False
 
-    
+    win.fill((0,0,0))
+    win.blit(bg, (i, 0))
+    win.blit(bg, (width+i, 0))
+    if i == -width:
+        win.blit(bg, (width+i, 0))
+        i = 0
+    i -= 1
+
+
     userInput = pygame.key.get_pressed()
 
     #Movment
@@ -45,6 +59,10 @@ while not done:
         x -= vel_x
     if userInput[pygame.K_RIGHT] and x < 500:
         x += vel_x
+    # if y > 0:
+    #     y -= vel_y
+    # if y < 500:
+    #     y += vel_y
 
     if jump is False and userInput[pygame.K_SPACE]:
         jump = True
