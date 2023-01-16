@@ -2,7 +2,7 @@ import pygame
 from math import pi    
 pygame.init()    
 # size variable is using for set screen size    
-size = [400, 300]    
+size = [500, 450]    
 screen = pygame.display.set_mode(size)    
 pygame.display.set_caption("Example program to draw geometry")    
 # done variable is using as flag     
@@ -28,10 +28,10 @@ while not done:
     pygame.draw.lines(screen, (0, 0, 0), False, [[0, 80], [50, 90], [200, 80], [220, 30]], 5)    
 
     # Draw a rectangle outline    
-    pygame.draw.rect(screen, (0, 0, 0), [75, 10, 50, 20], 2)    
+    pygame.draw.rect(screen, (0, 0, 0), [85, 30, 70, 40], 2)    
 
-    # Draw a solid rectangle    
-    pygame.draw.rect(screen, (0, 0, 0), [150, 10, 50, 20])    
+    # Draw a solid rectangle     
+    pygame.draw.rect(screen, (0, 0, 0), [0, 400, 500, 400])
 
     # This draw an ellipse outline, using a rectangle as the outside boundaries    
     pygame.draw.ellipse(screen, (255, 0, 0), [225, 10, 50, 20], 2)    
