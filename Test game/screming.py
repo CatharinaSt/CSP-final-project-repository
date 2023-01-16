@@ -12,7 +12,10 @@ vel = 10
 run = True
 while run:
 
+    win.fill((0, 0, 0 ))
+
     pygame.draw.circle(win, (255, 255, 255), (int(x), int(y)), radius)
+    
 
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
@@ -26,8 +29,10 @@ while run:
     if userInput[pygame.K_RIGHT]:
         x += vel
     if userInput[pygame.K_UP]:
-        x -= vel
+        y -= vel
     if userInput[pygame.K_DOWN]:
-        x -= vel
+        y += vel
+
+    pygame.time.delay(10)
 
     pygame.display.update()

@@ -1,21 +1,19 @@
 # Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
 # player movment code from https://youtu.be/hsJ7K301mEU
 import pygame
-import arcade
 
 pygame.init()
+win = pygame.display.set_mode((500, 500))
 
 black = (0, 0, 0)
 wite = (255, 255, 255)
 size = [500, 450]
-player_x = 1
-player_y = 359
-player_width = 40
-player_height = 40
-player_x_direction = 0
-player_y_direction = 0
-player_speed = 3
-vel = 10
+x = 20
+y = 380
+radius = 15
+vel_x = 10
+vel_y = 10
+jump = False
 
 screen = pygame.display.set_mode(size)
 screen.fill(wite)
@@ -23,29 +21,42 @@ pygame.display.set_caption("Pixel Game")
 
 done = False    
 clock = pygame.time.Clock()    
-while not done:   
+while not done:
+    win.fill((wite))
     clock.tick(10)
-        
-    for event in pygame.event.get():
-        #movment
-        userInput = pygame.key.get_pressed()
-        if userInput[pygame.K_LEFT] :
-            player_x_direction -= vel
-        if userInput[pygame.K_RIGHT] :
-            player_x_direction += vel
-        if userInput[pygame.K_UP] :
-            player_y_direction -= vel
-        if userInput[pygame.K_DOWN] :
-            player_y_direction += vel
-    
+
+    # Player
+    pygame.draw.circle(win, (black), (int(x), int(y)), radius)
     # graund     
     pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel     
     pygame.draw.rect(screen, black, [200, 349, 50, 50])
-    # player sprite
-    pygame.draw.rect(screen, black, [player_x, player_y, player_width, player_height])
-   
-    pygame.display.flip()    
+
+
+    for event in pygame.event.get() :
+        if event.type == pygame.QUIT:
+            run = False
+
+    
+    userInput = pygame.key.get_pressed()
+
+    #Movment
+    if userInput[pygame.K_LEFT] and x > 0:
+        x -= vel_x
+    if userInput[pygame.K_RIGHT] and x < 500:
+        x += vel_x
+
+    if jump is False and userInput[pygame.K_SPACE]:
+        jump = True
+
+    if jump is True:
+        y -= vel_y
+
+
+
+    pygame.time.delay(5)
+
+    pygame.display.update()
 
     if event.type == pygame.QUIT:
             done = True
