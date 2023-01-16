@@ -51,10 +51,14 @@ while not done:
 
     if jump is True:
         y -= vel_y
+        vel_y -= 1
+        if vel_y <-10:
+            jump = False
+            vel_y = 10
 
 
 
-    pygame.time.delay(5)
+    pygame.time.delay(20)
 
     pygame.display.update()
 
