@@ -2,6 +2,7 @@
 # player movment code from https://www.youtube.com/@MaxTeachesTech
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
 import pygame
+import sys
 
 pygame.init()
 win = pygame.display.set_mode((500, 500))
@@ -38,18 +39,25 @@ while not done:
     # opstakel
     opstakel = pygame.draw.rect(screen, red, [200, 349, 50, 50])
 
+    # add a box in a random position in a given coordanit fild, limet the number of boxes to a surten amout
+
+    # coler map the boxes and player so that if they get hit tehy die
+
+    # if euf time add helth bar, if not slap a rage game label on it
+
+        # if helth bar added add boxes that hel player
 
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
             run = False
 
-    win.fill((0,0,0))
-    win.blit(bg, (i, 0))
-    win.blit(bg, (width+i, 0))
-    if i == -width:
-        win.blit(bg, (width+i, 0))
-        i = 0
-    i -= 1
+    # win.fill((0,0,0))
+    # win.blit(bg, (i, 0))
+    # win.blit(bg, (width+i, 0))
+    # if i == -width:
+    #     win.blit(bg, (width+i, 0))
+    #     i = 0
+    # i -= 1
 
 
     userInput = pygame.key.get_pressed()
@@ -74,6 +82,8 @@ while not done:
             jump = False
             vel_y = 10
 
+    # if x in range(200,349,50):
+    #     x -= vel_x
 
 
     pygame.time.delay(20)
