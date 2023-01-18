@@ -1,4 +1,4 @@
-# All code revarenx links in REDME file
+# All code revarances links in REDME file
 import pygame
 import pygame.freetype
 import math
