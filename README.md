@@ -1,5 +1,6 @@
 # CSP-final-project-repository
-# Helo World
+
+[1 mitel vido lik](https://drive.google.com/file/d/1lb1I3DlQ9HJ_qk_iI0Q6Wblq8NGt_UBz/view)
 
 This progekt is a simple platform game that make you doge repeting opstakels that
 gowes on forever.
@@ -11,7 +12,6 @@ Thes are all my revaranses and plases I toulk code/images from.
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
 # score & collison https://www.youtube.com/@buildwithpython
 # repeting box https://www.youtube.com/@YoungWonks
-
 
 All of this progekt was like a brackthoght momet, I would smach my head agenst a brick wall
 until it broke just to walk a vew steps amd fined myself infort of anither brick wall.
