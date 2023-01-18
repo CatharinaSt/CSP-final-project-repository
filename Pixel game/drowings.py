@@ -91,9 +91,9 @@ while not done:
     # graund     
     graund = pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel
-    opstakel = pygame.draw.rect(screen, red, [boxX, boxY, 50, 40])
+    opstakel = pygame.draw.rect(screen, black, [boxX, boxY, 50, 40])
     # opstakel 2
-    opstakel = pygame.draw.rect(screen, blue, [boxX2, boxY2, 50, 40])
+    opstakel = pygame.draw.rect(screen, black, [boxX2, boxY2, 50, 40])
 
 
     for event in pygame.event.get() :
