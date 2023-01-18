@@ -1,11 +1,6 @@
-# Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
-# player movment code from https://www.youtube.com/@MaxTeachesTech
-# backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
-# score & collison https://www.youtube.com/@buildwithpython
 import pygame
 import pygame.freetype
 import math
-import random
 
 pygame.init()
 win = pygame.display.set_mode((500, 450))
@@ -64,14 +59,15 @@ while not done:
         win.blit(bg, (width+i, 0))
         i = 0
     i -= 1
-    boxX -=2
-    opstakelX -=2
+    boxX -=5
+    opstakelX -=5
     if boxX < -20:
         boxX = 500
     if opstakelX < -20:
         opstakelX = 500
 
-
+    if pygame.time.wait(100):
+        score_value = score_value + 1
   
     show_score(tetX, testY)
 
@@ -107,7 +103,7 @@ while not done:
     #collision
     collision = isCollision(opstakelX,opstakelY, x, y)
     if collision:
-        score_value -=1
+        score_value -=5
 
 
     pygame.time.delay(20)
