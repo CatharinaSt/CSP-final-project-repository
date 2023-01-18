@@ -3,10 +3,9 @@
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
 # score & collison https://www.youtube.com/@buildwithpython
 import pygame
-import sys
-import os
 import pygame.freetype
 import math
+import random
 
 pygame.init()
 win = pygame.display.set_mode((500, 450))
@@ -67,8 +66,12 @@ while not done:
     i -= 1
     boxX -=2
     opstakelX -=2
+    if boxX < -20:
+        boxX = 500
+    if opstakelX < -20:
+        opstakelX = 500
 
-    
+
   
     show_score(tetX, testY)
 
@@ -79,21 +82,10 @@ while not done:
     # opstakel
     opstakel = pygame.draw.rect(screen, red, [boxX, boxY, 50, 40])
 
-    # add a box in a random position in a given coordanit fild, limet the number of boxes to a surten amout
-
-    # coler map the boxes and player so that if they get hit tehy die
-
-    # if euf time add helth bar, if not slap a rage game label on it
-
-        # if helth bar added add boxes that hel player
 
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
             run = False
-    # if pygame.sprite.spritecollideany(player, objects, pygame.sprite.collide_mask):
-    #         screen.fill((255, 255, 255))
-    # else:
-    #     screen.fill((30, 30, 30))
 
 
     userInput = pygame.key.get_pressed()
@@ -102,17 +94,9 @@ while not done:
         x -= vel_x
     if userInput[pygame.K_RIGHT] and x < 500:
         x += vel_x
-    # y > 0:
-    #     y -= vel_y
-    # if y < 500:
-    #     y += vel_y
 
     if jump is False and userInput[pygame.K_SPACE]:
         jump = True
-    # up button moves up by some amount
-    # if max jump height is reached or button is released
-    # then jump is true
-    #since the sprite is not on the ground, jump is true
     if jump is True:
         y -= vel_y
         vel_y -= 1
@@ -134,66 +118,3 @@ while not done:
             done = True
 
 pygame.quit()
-
-
-
-
-# Code grave yard
-
-# update_player_position()
-
-# def update_player_position():
-#     global player_x
-#     global player_y
-#     global player_x_direction
-#     global player_y_direction
-#     if player_x_direction > 0:
-#        if player_x < 450 - player_width:
-#             player_x += player_x_direction * player_speed
-#     if player_x_direction > 0:
-#        if player_x > 0:
-#             player_x += player_x_direction * player_speed
-#     if player_y_direction > 0:
-#        if player_y < 450 - player_height:
-#             player_y += player_y_direction * player_speed
-#     if player_y_direction > 0:
-#        if player_y > 0:
-#             player_y += player_y_direction * player_speed
-
-
-#if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_LEFT:
-        #         player_x_direction = -1
-        #     if event.key == pygame.K_RIGHT:
-        #         player_x_direction = 1
-        #     if event.key == pygame.K_UP:
-        #         player_y_direction = -1
-        #     if event.key == pygame.K_DOWN:
-        #         player_y_direction = 1 
-        # if event.type == pygame.KEYUP:
-        #     # if event.key == pygame.K_LEFT:
-        #     player_x_direction = 0
-        #     # if event.key == pygame.K_RIGHT:
-        #     player_x_direction = 0
-        #     # if event.key == pygame.K_UP:
-        #     player_y_direction = 0
-        #     # if event.key == pygame.K_DOWN:
-        #     player_y_direction = 0
-
-        # if event.type == pygame.KEYDOWN:
-        #         # Jumping
-        #         if event.key == pygame.K_UP:
-        #             global gravity
-        #             gravity = -10
-
-        # def physics(keys_pressed, player):
-        #     global gravity
-        #     gravity += 0.8
-        #     player_y += gravity
-
-        #     if keys_pressed[pygame.K_LEFT]:
-        #         player_x -= player_speed
-        #     if keys_pressed[pygame.K_RIGHT]:
-        #         player_x += player_speed
-
-        # def input():
