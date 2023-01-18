@@ -2,12 +2,11 @@
 # player movment code from https://www.youtube.com/@MaxTeachesTech
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
 import pygame
-import sys
 
 pygame.init()
 win = pygame.display.set_mode((500, 500))
 bg_img = pygame.image.load('gras_BG.png')
-bg = pygame.transform.scale(bg_img, (500,450))
+bg = pygame.transform.scale(bg_img, (500, 450))
 
 black = (0, 0, 0)
 wite = (255, 255, 255)
@@ -32,10 +31,18 @@ while not done:
     win.fill((wite))
     clock.tick(10)
 
+    win.fill((0,0,0))
+    win.blit(bg, (i, 0))
+    win.blit(bg, (width+i, 0))
+    if i == -width:
+        win.blit(bg, (width+i, 0))
+        i = 0
+    i -= 1
+
     # Player
     player = pygame.draw.circle(win, (black), (int(x), int(y)), radius)
     # graund     
-    pygame.draw.rect(screen, black, [0, 400, 500, 400])
+    graund = pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel
     opstakel = pygame.draw.rect(screen, red, [200, 349, 50, 50])
 
@@ -51,14 +58,6 @@ while not done:
         if event.type == pygame.QUIT:
             run = False
 
-    win.fill((0,0,0))
-    win.blit(bg, (i, 0))
-    win.blit(bg, (width+i, 0))
-    if i == -width:
-        win.blit(bg, (width+i, 0))
-        i = 0
-    i -= 1
-
 
     userInput = pygame.key.get_pressed()
 
@@ -67,14 +66,17 @@ while not done:
         x -= vel_x
     if userInput[pygame.K_RIGHT] and x < 500:
         x += vel_x
-    # if y > 0:
+    # y > 0:
     #     y -= vel_y
     # if y < 500:
     #     y += vel_y
 
     if jump is False and userInput[pygame.K_SPACE]:
         jump = True
-
+    # up button moves up by some amount
+    # if max jump height is reached or button is released
+    # then jump is true
+    #since the sprite is not on the ground, jump is true
     if jump is True:
         y -= vel_y
         vel_y -= 1
@@ -82,10 +84,15 @@ while not done:
             jump = False
             vel_y = 10
 
+    if pygame.sprite.spritecollideany(player, opstakel, pygame.sprite.collide_mask):
+            screen.fill((255, 255, 255))
+
     # if x in range(200,349,50):
     #     x -= vel_x
 
-
+    # collision
+    # find the maxX and maxX and minY and minX of the potentially colliding objects
+    # if they overlap, do something
     pygame.time.delay(20)
 
     pygame.display.update()
