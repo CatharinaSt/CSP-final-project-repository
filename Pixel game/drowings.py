@@ -1,12 +1,25 @@
 # Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
 # player movment code from https://www.youtube.com/@MaxTeachesTech
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
+# score https://www.youtube.com/@buildwithpython
 import pygame
+import sys
+import os
+import pygame.freetype
+import math
 
 pygame.init()
 win = pygame.display.set_mode((500, 500))
 bg_img = pygame.image.load('gras_BG.png')
 bg = pygame.transform.scale(bg_img, (500, 450))
+
+def isCollision(boxX,boxY,x,y):
+    distance = math.sqrt((math.pow(opstakelX-x,2))) + (math.pow(opstakelY-y,2))
+    if distance <27:
+        return True
+    else:
+        return False
+
 
 black = (0, 0, 0)
 wite = (255, 255, 255)
@@ -14,12 +27,24 @@ red = (255, 0, 0)
 size = [500, 450]
 x = 20
 y = 380
+opstakelX = 225
+opstakelY = 349
 radius = 15
 vel_x = 10
 vel_y = 10
 i = 0
 width = 500
 jump = False
+
+#score
+score_value = 0
+font = pygame.font.Font('freesansbold.ttf', 32)
+tetX= 10
+testY = 10
+
+def show_score(x,y):
+    score = font.render("Score:" + str(score_value), True, (wite))
+    screen.blit(score, (x, y))
 
 screen = pygame.display.set_mode(size)
 screen.fill(wite)
@@ -39,12 +64,16 @@ while not done:
         i = 0
     i -= 1
 
+    # if (0, 0, 0, 255)(opstakel, red, threshold=(0, 0, 0, 255), othersurface=None, palette_colors=1):
+        
+    show_score(tetX, testY)
+
     # Player
     player = pygame.draw.circle(win, (black), (int(x), int(y)), radius)
     # graund     
     graund = pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel
-    opstakel = pygame.draw.rect(screen, red, [200, 349, 50, 50])
+    opstakel = pygame.draw.rect(screen, red, [opstakelX, opstakelY, 50, 50])
 
     # add a box in a random position in a given coordanit fild, limet the number of boxes to a surten amout
 
@@ -57,10 +86,13 @@ while not done:
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
             run = False
+    # if pygame.sprite.spritecollideany(player, objects, pygame.sprite.collide_mask):
+    #         screen.fill((255, 255, 255))
+    # else:
+    #     screen.fill((30, 30, 30))
 
 
     userInput = pygame.key.get_pressed()
-
     #Movment
     if userInput[pygame.K_LEFT] and x > 0:
         x -= vel_x
@@ -84,8 +116,14 @@ while not done:
             jump = False
             vel_y = 10
 
-    if pygame.sprite.spritecollideany(player, opstakel, pygame.sprite.collide_mask):
-            screen.fill((255, 255, 255))
+    #collision
+    collision = isCollision(opstakelX,opstakelY, x, y)
+    if collision:
+        score_value -=1
+
+
+    # if pygame.sprite.spritecollideany(player, opstakel, pygame.sprite.collide_mask):
+    #         screen.fill((255, 255, 255))
 
     # if x in range(200,349,50):
     #     x -= vel_x
@@ -101,6 +139,7 @@ while not done:
             done = True
 
 pygame.quit()
+
 
 
 
