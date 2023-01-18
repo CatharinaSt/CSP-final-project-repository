@@ -3,10 +3,13 @@ import pygame.freetype
 import math
 
 pygame.init()
+
+#bakgraund image
 win = pygame.display.set_mode((500, 450))
 bg_img = pygame.image.load('gras_BG.png')
 bg = pygame.transform.scale(bg_img, (500, 450))
 
+#The math for the collision code
 def isCollision(opstakelX,opstakelY,x,y):
     distance = math.sqrt(math.pow(opstakelX-x,2)) + (math.pow(opstakelY-y,2))
     if distance <50:
@@ -14,10 +17,11 @@ def isCollision(opstakelX,opstakelY,x,y):
     else:
         return False
 
-
+#All the varibles
 black = (0, 0, 0)
 wite = (255, 255, 255)
 red = (255, 0, 0)
+blue = (0, 0, 255)
 size = [500, 450]
 x = 20
 y = 380
@@ -25,6 +29,10 @@ opstakelX = 250
 opstakelY = 379
 boxX = 225
 boxY = 359
+opstakelX2 = 550
+opstakelY2 = 379
+boxX2 = 525
+boxY2 = 359
 radius = 15
 vel_x = 10
 vel_y = 10
@@ -61,10 +69,17 @@ while not done:
     i -= 1
     boxX -=5
     opstakelX -=5
+    boxX2 -=5
+    opstakelX2 -=5
     if boxX < -20:
         boxX = 500
     if opstakelX < -20:
         opstakelX = 500
+
+    if boxX2 < -20:
+        boxX2 = 500
+    if opstakelX2 < -20:
+        opstakelX2 = 500
 
     if pygame.time.wait(100):
         score_value = score_value + 1
@@ -77,6 +92,8 @@ while not done:
     graund = pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel
     opstakel = pygame.draw.rect(screen, red, [boxX, boxY, 50, 40])
+    # opstakel 2
+    opstakel = pygame.draw.rect(screen, blue, [boxX2, boxY2, 50, 40])
 
 
     for event in pygame.event.get() :
@@ -102,6 +119,9 @@ while not done:
 
     #collision
     collision = isCollision(opstakelX,opstakelY, x, y)
+    if collision:
+        score_value -=5
+    collision = isCollision(opstakelX2,opstakelY2, x, y)
     if collision:
         score_value -=5
 
