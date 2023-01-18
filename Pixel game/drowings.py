@@ -1,7 +1,7 @@
 # Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
 # player movment code from https://www.youtube.com/@MaxTeachesTech
 # backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
-# score https://www.youtube.com/@buildwithpython
+# score & collison https://www.youtube.com/@buildwithpython
 import pygame
 import sys
 import os
@@ -9,13 +9,13 @@ import pygame.freetype
 import math
 
 pygame.init()
-win = pygame.display.set_mode((500, 500))
+win = pygame.display.set_mode((500, 450))
 bg_img = pygame.image.load('gras_BG.png')
 bg = pygame.transform.scale(bg_img, (500, 450))
 
-def isCollision(boxX,boxY,x,y):
-    distance = math.sqrt((math.pow(opstakelX-x,2))) + (math.pow(opstakelY-y,2))
-    if distance <27:
+def isCollision(opstakelX,opstakelY,x,y):
+    distance = math.sqrt(math.pow(opstakelX-x,2)) + (math.pow(opstakelY-y,2))
+    if distance <50:
         return True
     else:
         return False
@@ -27,8 +27,10 @@ red = (255, 0, 0)
 size = [500, 450]
 x = 20
 y = 380
-opstakelX = 225
-opstakelY = 349
+opstakelX = 250
+opstakelY = 379
+boxX = 225
+boxY = 359
 radius = 15
 vel_x = 10
 vel_y = 10
@@ -63,9 +65,11 @@ while not done:
         win.blit(bg, (width+i, 0))
         i = 0
     i -= 1
+    boxX -=2
+    opstakelX -=2
 
-    # if (0, 0, 0, 255)(opstakel, red, threshold=(0, 0, 0, 255), othersurface=None, palette_colors=1):
-        
+    
+  
     show_score(tetX, testY)
 
     # Player
@@ -73,7 +77,7 @@ while not done:
     # graund     
     graund = pygame.draw.rect(screen, black, [0, 400, 500, 400])
     # opstakel
-    opstakel = pygame.draw.rect(screen, red, [opstakelX, opstakelY, 50, 50])
+    opstakel = pygame.draw.rect(screen, red, [boxX, boxY, 50, 40])
 
     # add a box in a random position in a given coordanit fild, limet the number of boxes to a surten amout
 
@@ -122,15 +126,6 @@ while not done:
         score_value -=1
 
 
-    # if pygame.sprite.spritecollideany(player, opstakel, pygame.sprite.collide_mask):
-    #         screen.fill((255, 255, 255))
-
-    # if x in range(200,349,50):
-    #     x -= vel_x
-
-    # collision
-    # find the maxX and maxX and minY and minX of the potentially colliding objects
-    # if they overlap, do something
     pygame.time.delay(20)
 
     pygame.display.update()
