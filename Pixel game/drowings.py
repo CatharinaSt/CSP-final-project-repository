@@ -1,4 +1,9 @@
-# All code revarances links in REDME file
+# All code revarances
+# Vigual code from: https://www.javatpoint.com/how-to-develop-a-game-in-python
+# player movment code from https://www.youtube.com/@MaxTeachesTech
+# backgraund https://www.freepik.com/premium-vector/pixel-art-game-background-grass-sky-clouds_9047947.htm
+# score & collison https://www.youtube.com/@buildwithpython
+# repeting box https://www.youtube.com/@YoungWonks
 import pygame
 import pygame.freetype
 import math
